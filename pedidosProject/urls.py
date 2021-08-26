@@ -18,13 +18,14 @@ from django.urls import path
 from pedidosApp import views
 from pedidosApp.views import AgregarProductoCarrito, ConsultarCarrito, ComprarVenta, EliminarProductoCarrito, ConsultarCarritoCliente, ConsultarCarritoActualCliente
 from pedidosApp.views import CancelarCompra
+from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('detalleorder/agregar/', AgregarProductoCarrito.as_view()),
     path('detalleorder/consultar/', ConsultarCarrito.as_view()),
     path('order/comprar/', ComprarVenta.as_view()),
-    path('detalleorder/eliminar/', EliminarProductoCarrito.as_view()),
-    path('order/consultarcarrito/cliente/', ConsultarCarritoCliente.as_view()),
-    path('order/carrito/cliente/', ConsultarCarritoActualCliente.as_view()),
+    path('detalleorder/eliminar', EliminarProductoCarrito.as_view()),
+    path('order/consultarcarrito/cliente', ConsultarCarritoCliente.as_view()),
+    path('order/carrito/cliente', ConsultarCarritoActualCliente.as_view()),
     path('order/carrito/cancelar/', CancelarCompra.as_view())
 ]
