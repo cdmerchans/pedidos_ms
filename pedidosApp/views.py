@@ -134,7 +134,7 @@ class AgregarProductoCarrito (APIView):
 
         
         
-        return Response({"message": "Producto agregado"}, status=status.HTTP_201_CREATED)
+        return Response({"message": "Producto agregado", "order": ids}, status=status.HTTP_201_CREATED)
 
 class ConsultarCarrito(APIView):
     def get(self, request, *args, **kwargs):
@@ -199,9 +199,9 @@ class ConsultarCarritoActualCliente(APIView):
         except Order.DoesNotExist:
             return Response({"message": "La orden no existe"}, status=status.HTTP_404_NOT_FOUND)
 
-        actual_id_order = request.query_params.get('id_order', None)
+        actual_id_order = Order(request.query_params.get('id_order', None))
         #actual_id_order = request.data['id_order']
-        order_old_test= Order.objects.filter(id_order = actual_id_order) & Order.objects.filter(id_person = id_person)
+        order_old_test= DetallesOrder.objects.filter(id_order = actual_id_order)
         order_old_test_va=list(order_old_test.values())
         serializer = OrderSerializer(order_old_test,many=True)
 
